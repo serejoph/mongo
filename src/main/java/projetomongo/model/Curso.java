@@ -1,5 +1,6 @@
 package projetomongo.model;
 
+
 public class Curso {
 
 	private String nome;
@@ -11,5 +12,13 @@ public class Curso {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	public Curso(String nome) {
+		super();
+		this.nome = nome;
+	}
+
+	public Curso() {
+
+	}
 }

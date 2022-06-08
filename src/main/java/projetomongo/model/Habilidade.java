@@ -1,8 +1,11 @@
 package projetomongo.model;
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
 public class Habilidade {
 
 	private String nome;
+	@Field(name = "nível")
 	private String nivel;
 
 	public String getNome() {
@@ -21,4 +24,11 @@ public class Habilidade {
 		this.nivel = nivel;
 	}
 
+	@Override
+	public String toString() {
+		return "Habilidade [nome=" + nome + ", nivel=" + nivel + "]";
+	}
+
+	
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import projetomongo.controller.dto.UserDto;
 import projetomongo.model.Aluno;
 import projetomongo.repository.AlunoRepository;
 
@@ -17,5 +18,11 @@ public class AlunoService {
 	public List<Aluno> findAll(){
 		return alunoRepository.findAll();
 	}
+
+	public void cadastrar(UserDto dto) {
+		alunoRepository.save(dto.toAluno());	
+		
+	}
+	
 	
 }

@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "alunos")
+@Document(collection = "novosalunos")
 public class Aluno {
 
 	@Id
@@ -16,8 +16,8 @@ public class Aluno {
 	private String nome;
 	@Field(name = "dataDeNascimento")
 	private LocalDate dataNascimento;
-	private String curso;
-	private List<Double> notas;
+	private Curso curso;
+	private List<Nota> notas;
 	private List<Habilidade> habilidades;
 
 	public ObjectId get_id() {
@@ -44,19 +44,19 @@ public class Aluno {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getCurso() {
+	public Curso getCurso() {
 		return curso;
 	}
 
-	public void setCurso(String curso) {
+	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 
-	public List<Double> getNotas() {
+	public List<Nota> getNotas() {
 		return notas;
 	}
 
-	public void setNotas(List<Double> notas) {
+	public void setNotas(List<Nota> notas) {
 		this.notas = notas;
 	}
 
