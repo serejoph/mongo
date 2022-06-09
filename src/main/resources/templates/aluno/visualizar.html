@@ -18,33 +18,42 @@
 		</div>
 
 		<h2>Dados Básicos</h2>
-		
+
 		<form>
-		<div class="mb-3">
-				<label for="nome" class="form-label">Nome</label> <input th:field="${aluno.nome}" type="text"
-					class="form-control" id="nome" disabled="disabled">					
-			</div>
-			
 			<div class="mb-3">
-				<label for="nome" class="form-label">Data de Nascimento</label> <input th:field="${aluno.dataNascimento}" type="text"
-					class="form-control" id="dataNascimento" disabled="disabled">	
+				<label for="nome" class="form-label">Nome</label> <input
+					th:field="${aluno.nome}" type="text" class="form-control" id="nome"
+					disabled="disabled">
 			</div>
-			
+
 			<div class="mb-3">
-				<label for="nome" class="form-label">Data de Nascimento</label> <input th:field="${aluno.dataNascimento}" type="text"
-					class="form-control" id="dataNascimento" disabled="disabled">	
+				<label for="nome" class="form-label">Data de Nascimento</label> <input
+					th:field="${aluno.dataNascimento}" type="text" class="form-control"
+					id="dataNascimento" disabled="disabled">
+			</div>
+
+			<div class="mb-3">
+				<label for="nome" class="form-label">Curso</label> <input
+					th:field="${aluno.curso.nome}" type="text" class="form-control"
+					id="curso" disabled="disabled">
 			</div>
 		</form>
-		 <h2>Notas</h2>
-		 <th:block th:each="nota : ${aluno.notas}" class="form-control">
+		<h2>Notas</h2>
+		<th:block th:each="nota : ${aluno.notas}" class="form-control">
 		Nota: [[${nota.valor}]] 
 		<br>
-		 </th:block>
-		
+		</th:block>
+
+		<h2 class="mt-4">Habilidades</h2>
+		<th:block th:each="habilidade : ${aluno.habilidades}" class="form-control">
+		Nome: [[${habilidade.nome}]] - Nível: [[${habilidade.nivel}]] 
+		<br>
+		</th:block>
+
 
 
 		<a th:href="@{/}"><button type="button"
-				class="mt-2 btn btn-primary">Voltar</button></a>
+				class="mt-4 btn btn-primary">Voltar</button></a>
 	</div>
 
 </body>
