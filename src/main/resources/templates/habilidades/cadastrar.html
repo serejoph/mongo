@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="container">
+		<div
+			class="mt-4 mb-4 p-4 d-flex justify-content-center bg-primary text-white rounded">
+			<h1>Cadastrar Habilidade para [[${aluno.nome}]]</h1>
+		</div>
+		<form th:object="${habilidadeDto}" th:action="'/habilidades/cadastrar/' + ${aluno.id}" method="post">
+			<div class="form-group">
+				<label for="nome">Nome</label> <input th:field="*{nome}" th:errorclass="is-invalid"
+					type="text" class="form-control" id="nome" th:placeholder="${aluno.id}">
+					<span class="invalid-feedback" th:errors="*{nome}"></span>
+			</div>
+			<div class="form-group mt-2">
+				<label for="nivel">Nível</label> <input th:field="*{nivel}" th:errorclass="is-invalid"
+					type="text" class="form-control" id="nivel">
+					<span class="invalid-feedback" th:errors="*{nivel}"></span>
+			</div>
+			<button type="submit" class="mt-2 btn btn-primary">Salvar Habilidade</button>
+		</form>
+
+	</div>
+</body>
+</html>

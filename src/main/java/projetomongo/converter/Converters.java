@@ -10,6 +10,6 @@ import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 public class Converters {
 	@Bean
 	public MongoCustomConversions mongoCustomConversions() {
-		return new MongoCustomConversions(Arrays.asList(new DoubletoNotaConverter(), new CursoToStringConverter()));
+		return new MongoCustomConversions(Arrays.asList(new DoubletoNotaConverter(), new CursoToStringConverter(), new NotaToDoubleConverter()));
 	}
 }

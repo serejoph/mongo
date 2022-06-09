@@ -16,11 +16,30 @@
 			class="mt-4 mb-4 p-4 d-flex justify-content-center bg-primary text-white rounded">
 			<h1>Lista de Alunos</h1>
 		</div>
-		<div th:each="aluno : ${alunos}">
-		<span th:text="${aluno.nome} + ' - ' + ${aluno.curso.nome} + ' - ' + ${aluno.dataNascimento}"></span>
-		</div>
 
-		<a th:href="@{/}"><button type="button" class="mt-4 btn btn-primary">Voltar</button></a>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Nome</th>
+					<th scope="col">Data de Nascimento</th>
+					<th scope="col">Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="aluno : ${alunos}">
+					<th scope="col" th:text="${aluno.nome}"></th>
+					<th scope="col" th:text="${aluno.dataNascimento}"></th>
+					<th scope="col">
+						<a th:href="'/aluno/visualizar/' + ${aluno.id}"><button type="button" class="btn btn-primary">Visualizar</button></a>
+						<a th:href="'/habilidades/cadastrar/' + ${aluno.id}"><button type="button" class="btn btn-primary">Habilidades</button></a>
+						<a th:href="'/notas/cadastrar/' + ${aluno.id}"><button type="button" class="btn btn-primary">Notas</button></a></th>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<a th:href="@{/}"><button type="button"
+				class="mt-4 btn btn-primary">Voltar</button></a>
 	</div>
 
 </body>

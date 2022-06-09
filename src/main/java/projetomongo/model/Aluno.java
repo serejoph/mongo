@@ -1,31 +1,33 @@
 package projetomongo.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
 @Document(collection = "novosalunos")
 public class Aluno {
 
 	@Id
-	private ObjectId _id;
+	private String id;
 	private String nome;
 	@Field(name = "dataDeNascimento")
 	private LocalDate dataNascimento;
 	private Curso curso;
-	private List<Nota> notas;
-	private List<Habilidade> habilidades;
+	private List<Nota> notas = new ArrayList<>();
+	@Field(targetType = FieldType.DOUBLE)
+	private List<Habilidade> habilidades = new ArrayList<>();
 
-	public ObjectId get_id() {
-		return _id;
+	public String getId() {
+		return id;
 	}
 
-	public void set_id(ObjectId _id) {
-		this._id = _id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getNome() {
