@@ -70,4 +70,12 @@ public class Aluno {
 		this.habilidades = habilidades;
 	}
 
+	@Override
+	public String toString() {
+		return "Aluno [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", curso=" + curso
+				+ ", notas=" + notas + ", habilidades=" + habilidades + "]";
+	}
+
+	
+	
 }

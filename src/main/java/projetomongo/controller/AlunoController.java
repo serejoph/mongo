@@ -9,7 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import projetomongo.controller.dto.UserDto;
 import projetomongo.service.AlunoService;
@@ -48,9 +50,19 @@ public class AlunoController {
 	public String visualizar(@PathVariable String id, Model model) {
 		
 		model.addAttribute("aluno", alunoService.findById(id));
-		return "/aluno/visualizar";
-		
-		
+		return "/aluno/visualizar";		
+	}
+	
+	@GetMapping("/pesquisar")
+	public String formularioDePesquisa() {
+		return "aluno/formulariodepesquisa";
+	}
+	
+	@PostMapping("/pesquisar")
+	public String pesquisarAluno(String nome, Model model) {
+		System.out.println(nome);
+		model.addAttribute("alunos", alunoService.findByName(nome));
+		return "aluno/listar";
 	}
 	
 }

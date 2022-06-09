@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
 import projetomongo.controller.dto.HabilidadeDto;
@@ -46,6 +49,22 @@ public class AlunoService {
 		aluno.getNotas().add(notaDto.toNota());
 		alunoRepository.save(aluno);
 		
+	}
+
+	public List<Aluno> findByNome(String name) {
+		return alunoRepository.findByNome(name);
+		
+	}
+
+	public List<Aluno> findByName(String nome) {
+		Aluno aluno = new Aluno();
+		aluno.setNome(nome);
+		ExampleMatcher matcher = ExampleMatcher.matching();
+		matcher = matcher.withIgnorePaths("notas", "habilidades").withStringMatcher(StringMatcher.CONTAINING);
+		List<Aluno> findAll = alunoRepository.findAll(Example.of(aluno, matcher));
+		findAll.forEach(System.out::println);
+		System.out.println("printeiall");
+		return findAll;
 	}
 	
 	
