@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import projetomongo.controller.dto.HabilidadeDto;
 import projetomongo.controller.dto.NotaDto;
 import projetomongo.controller.dto.UserDto;
+import projetomongo.enums.Corte;
 import projetomongo.model.Aluno;
 import projetomongo.repository.AlunoRepository;
 
@@ -22,16 +23,16 @@ public class AlunoService {
 
 	@Autowired
 	AlunoRepository alunoRepository;
-	
-	public List<Aluno> findAll(){
+
+	public List<Aluno> findAll() {
 		return alunoRepository.findAll();
 	}
 
 	public void cadastrar(UserDto dto) {
-		alunoRepository.save(dto.toAluno());	
-		
+		alunoRepository.save(dto.toAluno());
+
 	}
-	
+
 	public Aluno findById(String id) {
 		Optional<Aluno> alunoOpt = alunoRepository.findById(id);
 		return alunoOpt.isPresent() ? alunoOpt.get() : new Aluno();
@@ -41,19 +42,19 @@ public class AlunoService {
 		Aluno aluno = alunoRepository.findById(id).get();
 		aluno.getHabilidades().add(habilidadeDto.toHabilidade());
 		alunoRepository.save(aluno);
-		
+
 	}
 
 	public void salvarNota(String id, NotaDto notaDto) {
 		Aluno aluno = alunoRepository.findById(id).get();
 		aluno.getNotas().add(notaDto.toNota());
 		alunoRepository.save(aluno);
-		
+
 	}
 
 	public List<Aluno> findByNome(String name) {
 		return alunoRepository.findByNome(name);
-		
+
 	}
 
 	public List<Aluno> findByName(String nome) {
@@ -66,6 +67,10 @@ public class AlunoService {
 		System.out.println("printeiall");
 		return findAll;
 	}
-	
-	
+
+	public Object findByNota(String nota, Corte corte) {
+		if (corte == Corte.APROVADOS) return alunoRepository.findAprovados(Double.parseDouble(nota));
+		return alunoRepository.findReprovados(Double.parseDouble(nota));
+	}
+
 }

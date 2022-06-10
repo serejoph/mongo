@@ -9,11 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import projetomongo.controller.dto.UserDto;
+import projetomongo.enums.Corte;
 import projetomongo.service.AlunoService;
 
 @Controller
@@ -60,8 +59,20 @@ public class AlunoController {
 	
 	@PostMapping("/pesquisar")
 	public String pesquisarAluno(String nome, Model model) {
-		System.out.println(nome);
+
 		model.addAttribute("alunos", alunoService.findByName(nome));
+		return "aluno/listar";
+	}
+	
+	@GetMapping("/pesquisar-por-nota")
+	public String formularioDePesquisaPorNota() {
+		return "aluno/formulariodepesquisapornota";
+	}
+	
+	@PostMapping("/pesquisar-por-nota")
+	public String pesquisarNota(String nota, Corte corte, Model model) {
+		
+		model.addAttribute("alunos", alunoService.findByNota(nota, corte));
 		return "aluno/listar";
 	}
 	
