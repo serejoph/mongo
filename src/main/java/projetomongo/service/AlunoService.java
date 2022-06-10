@@ -1,5 +1,6 @@
 package projetomongo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,8 +70,11 @@ public class AlunoService {
 	}
 
 	public Object findByNota(String nota, Corte corte) {
-		if (corte == Corte.APROVADOS) return alunoRepository.findAprovados(Double.parseDouble(nota));
+		try { if (corte == Corte.APROVADOS) return alunoRepository.findAprovados(Double.parseDouble(nota));
 		return alunoRepository.findReprovados(Double.parseDouble(nota));
+		} catch (NullPointerException | NumberFormatException e) {
+			return new ArrayList<>();
+		}
 	}
 
 }
