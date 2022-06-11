@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Add Map</title>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<link rel="stylesheet" type="text/css" href="./style.css" />
+<script type="module" src="./index.js"></script>
+</head>
+<body>
+	<h3>My Google Maps Demo</h3>
+	<!--The div element for the map -->
+	<div id="map" style="width: 100%; height:500px"></div>
+<div id="demo"></div>
+	<script>
+		function initMap() {
+			const xhttp = new XMLHttpRequest();
+			  xhttp.onload = function() {
+			    var alunos = JSON.parse(this.response);
+			    alunos.forEach(aluno => {
+			    	new google.maps.Marker({
+						position : aluno.localizacao,
+						map : map,
+						label: aluno.nome,
+					})
+			    console.log(aluno.localizacao)
+			    })
+			    }
+			  xhttp.open("GET", "../api/alunos", true);
+			  xhttp.send();
+			
+			
+			// The location
+			const escola = {
+				lat : -15.8196436,
+				lng : -47.8965739
+			};
+			const escola2 = {
+					lat : -15.8297,
+					lng : -47.9066
+				};
+			// The map, centered the location
+			const map = new google.maps.Map(document.getElementById("map"), {
+				zoom : 14,
+				center : escola,
+			});
+			// The marker
+			const marker = new google.maps.Marker({
+				position : escola,
+				map : map,
+			})
+			
+			const marker2 = new google.maps.Marker({
+				position : escola2,
+				map : map,
+			})
+			;
+		}
+
+		window.initMap = initMap;
+	</script>
+
+	<!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+		defer></script>
+</body>
+</html>

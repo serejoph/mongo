@@ -21,6 +21,8 @@ public class Aluno {
 	private List<Nota> notas = new ArrayList<>();
 	@Field(targetType = FieldType.DOUBLE)
 	private List<Habilidade> habilidades = new ArrayList<>();
+	
+	private Localizacao localizacao;
 
 	public String getId() {
 		return id;
@@ -68,6 +70,14 @@ public class Aluno {
 
 	public void setHabilidades(List<Habilidade> habilidades) {
 		this.habilidades = habilidades;
+	}
+
+	public Localizacao getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
 	}
 
 	@Override

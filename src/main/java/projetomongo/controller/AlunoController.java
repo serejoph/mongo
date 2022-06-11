@@ -76,4 +76,9 @@ public class AlunoController {
 		return "aluno/listar";
 	}
 	
+	@GetMapping("/mapa")
+	public String mapa() {
+		return "aluno/mapa";
+	}
+	
 }
