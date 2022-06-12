@@ -25,6 +25,12 @@ public class Localizacao {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 	
 	
