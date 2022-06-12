@@ -31,7 +31,7 @@ public class AlunoApi {
 	}
 	
 	@PostMapping("/alunos")
-	public ResponseEntity<List<LocalizacaoDto>> postAlunos(@RequestBody String id){		
+	public ResponseEntity<List<LocalizacaoDto>> postAlunos(@RequestBody() String id){		
 		System.out.println(id);
 		return ResponseEntity.ok(alunoService.findNear(id).stream().map(x -> new LocalizacaoDto(x)).collect(Collectors.toList()));
 	}
