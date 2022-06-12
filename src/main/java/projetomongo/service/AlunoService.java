@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 import com.google.maps.errors.ApiException;
@@ -38,10 +41,9 @@ public class AlunoService {
 			System.out.println("pré excep");
 			Double[] latLng = localizacaoService.getLatLong(aluno.getLocalizacao());
 			System.out.println("post");
-			aluno.getLocalizacao().setLat(latLng[0]);
-			aluno.getLocalizacao().setLng(latLng[1]);
+			aluno.getLocalizacao().setCoordinates(latLng);
 			alunoRepository.save(aluno);
-			
+
 		} catch (ApiException | InterruptedException | IOException e) {
 			e.printStackTrace();
 		}
@@ -84,11 +86,23 @@ public class AlunoService {
 	}
 
 	public Object findByNota(String nota, Corte corte) {
-		try { if (corte == Corte.APROVADOS) return alunoRepository.findAprovados(Double.parseDouble(nota));
-		return alunoRepository.findReprovados(Double.parseDouble(nota));
+		try {
+			if (corte == Corte.APROVADOS)
+				return alunoRepository.findAprovados(Double.parseDouble(nota));
+			return alunoRepository.findReprovados(Double.parseDouble(nota));
 		} catch (NullPointerException | NumberFormatException e) {
 			return new ArrayList<>();
 		}
+	}
+
+	public List<Aluno> findNear(String id) {
+		Optional<Aluno> alunoOpt = alunoRepository.findById(id);
+		if (alunoOpt.isEmpty()) return new ArrayList<>();
+		Aluno aluno = alunoOpt.get();
+		Double[] coordenadas = aluno.getLocalizacao().getCoordinates();
+		Point point = new Point(coordenadas[0], coordenadas[1]);
+		Distance d = new Distance(5, Metrics.KILOMETERS);
+		return alunoRepository.findByLocalizacaoNear(point, d);
 	}
 
 }

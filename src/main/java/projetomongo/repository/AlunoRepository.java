@@ -2,6 +2,8 @@ package projetomongo.repository;
 
 import java.util.List;
 
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -18,5 +20,5 @@ public interface AlunoRepository extends MongoRepository<Aluno, String>{
 	@Query("{notas: {$lt : [?0]}}")
 	List<Aluno> findReprovados(Double nota);
 	
-	
+	List<Aluno> findByLocalizacaoNear(Point location, Distance distance);
 }

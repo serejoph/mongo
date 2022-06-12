@@ -78,7 +78,8 @@ public class AlunoController {
 	}
 	
 	@GetMapping("/mapa")
-	public String mapa() {
+	public String mapa(Model model) {
+		model.addAttribute("alunos", alunoService.findAll());
 		return "aluno/mapa";
 	}
 	
