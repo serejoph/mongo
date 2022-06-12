@@ -21,8 +21,7 @@ public class Aluno {
 	private List<Nota> notas = new ArrayList<>();
 	@Field(targetType = FieldType.DOUBLE)
 	private List<Habilidade> habilidades = new ArrayList<>();
-	
-	private Localizacao localizacao;
+	private Localizacao localizacao = new Localizacao();
 
 	public String getId() {
 		return id;

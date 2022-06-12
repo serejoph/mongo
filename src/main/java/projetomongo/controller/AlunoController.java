@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import projetomongo.controller.dto.UserDto;
+import projetomongo.dto.UserDto;
 import projetomongo.enums.Corte;
+import projetomongo.model.Aluno;
 import projetomongo.service.AlunoService;
 
 @Controller
@@ -32,8 +33,8 @@ public class AlunoController {
 		if(res.hasErrors()) {
 			return "aluno/cadastrar";
 		}
-		
-		alunoService.cadastrar(dto);
+		Aluno aluno = dto.toAluno();
+		alunoService.cadastrar(aluno);
 		
 		return "redirect:/";
 		

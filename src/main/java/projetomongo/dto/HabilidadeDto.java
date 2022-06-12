@@ -1,4 +1,4 @@
-package projetomongo.controller.dto;
+package projetomongo.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

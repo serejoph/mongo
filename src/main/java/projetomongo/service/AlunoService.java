@@ -1,5 +1,6 @@
 package projetomongo.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +13,10 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
-import projetomongo.controller.dto.HabilidadeDto;
-import projetomongo.controller.dto.NotaDto;
-import projetomongo.controller.dto.UserDto;
+import com.google.maps.errors.ApiException;
+
+import projetomongo.dto.HabilidadeDto;
+import projetomongo.dto.NotaDto;
 import projetomongo.enums.Corte;
 import projetomongo.model.Aluno;
 import projetomongo.repository.AlunoRepository;
@@ -24,13 +26,25 @@ public class AlunoService {
 
 	@Autowired
 	AlunoRepository alunoRepository;
+	@Autowired
+	LocalizacaoService localizacaoService;
 
 	public List<Aluno> findAll() {
 		return alunoRepository.findAll();
 	}
 
-	public void cadastrar(UserDto dto) {
-		alunoRepository.save(dto.toAluno());
+	public void cadastrar(Aluno aluno) {
+		try {
+			System.out.println("pré excep");
+			Double[] latLng = localizacaoService.getLatLong(aluno.getLocalizacao());
+			System.out.println("post");
+			aluno.getLocalizacao().setLat(latLng[0]);
+			aluno.getLocalizacao().setLng(latLng[1]);
+			alunoRepository.save(aluno);
+			
+		} catch (ApiException | InterruptedException | IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

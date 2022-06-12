@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import projetomongo.controller.dto.NotaDto;
+import projetomongo.dto.NotaDto;
 import projetomongo.service.AlunoService;
 
 @Controller
